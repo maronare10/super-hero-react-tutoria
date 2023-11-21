@@ -15,6 +15,26 @@ const Login = () => {
 
     setPassword(value)
   }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    // console.log('Estoy listo para enviar la información')
+
+    const URL = 'https://dummyjson.com/auth/login'
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username,
+        password
+      })
+    }
+   const response = await fetch (URL, options)
+   const data = await response.json()
+
+   console.log(data);
+  }
   
   return (
     <>
@@ -27,7 +47,7 @@ const Login = () => {
         {password}
       */}
 
-      <form className="mt-6 space-y-4" >
+      <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
         <input
           autoFocus
           type="text"
